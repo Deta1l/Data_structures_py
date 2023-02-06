@@ -1,6 +1,7 @@
+'''
 stock_prices = [298, 305, 320, 301, 292]
 #https://skillbox.ru/media/code/big-o-notation-chto-eto-takoe-i-kak-eye-poschitat/?ysclid=ldsxdn4oey460017674
-'''
+
 # o(1)
 a = int(input("vvedite den -> "))
 a -= 1
@@ -39,4 +40,13 @@ stock_prices.sort()
 print(stock_prices)
 '''
 
+class Node:
+    def __init__(self, data=None, next=None):
+        self.data = data
+        self.next = next
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+    
 
