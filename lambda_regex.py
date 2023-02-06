@@ -16,3 +16,7 @@ L = [Alex, Amanda, David]
 
 L.sort(key=lambda x: x.age)
 print([item.name for item in L])
+
+#--------regex---------
+
+#https://habr.com/ru/post/349860/
