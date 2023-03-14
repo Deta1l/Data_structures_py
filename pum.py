@@ -1,2 +1,6 @@
-A = [ input() for i in range(int(input()))]
-print(A)
+lst = input()    
+result = [int(elem) for elem in lst.split()]
+
+
+
+print(result)
