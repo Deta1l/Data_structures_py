@@ -31,17 +31,17 @@ def obhod_v_glubinu(x, f):
 
 #обход в ширину 
 def obhod_v_shirinu(x,f):
-    visited = [] 
+    visited_1 = [] 
     queue = []  
     otvet = []
 
-    def shir_(v):
-        if v in visited: 
+    def shir_(x):
+        if x in visited_1: 
             return
-        visited.append(v)  
-        otvet.append(v)  
-        for i in f[v]:  # Все смежные с v вершины
-            if not i in visited:
+        visited_1.append(x)  
+        otvet.append(x)  
+        for i in f[x]: 
+            if not i in visited_1:
                 queue.append(i)
         while queue:
             shir_(queue.pop(0))
