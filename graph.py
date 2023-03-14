@@ -25,8 +25,28 @@ def obhod_v_glubinu(x, f):
     glubina_(x) 
     print(visited_1)
 
-obhod_v_glubinu(1, graph_1)
+#obhod_v_glubinu(1, graph_1)
 
 #--------------------------------------------------------
 
 #обход в ширину 
+def obhod_v_shirinu(x,f):
+    visited = [] 
+    queue = []  
+    otvet = []
+
+    def shir_(v):
+        if v in visited: 
+            return
+        visited.append(v)  
+        otvet.append(v)  
+        for i in f[v]:  # Все смежные с v вершины
+            if not i in visited:
+                queue.append(i)
+        while queue:
+            shir_(queue.pop(0))
+
+    shir_(x)  
+    print(otvet)  
+
+obhod_v_shirinu(1, graph_1)
