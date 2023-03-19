@@ -64,34 +64,82 @@ class Graph:
             self.adjList[src].append((dest, weight))
 '''
  
- #--------------------------------------------------------
+#--------------------------------------------------------
  #гамильтонов цикл
 
-G = {0:[1],
-    1:[0, 2], 
-    2:[1, 3], 
-    3:[2, 4, 5], 
-    4:[3, 6], 
-    5:[3], 
-    6:[4]
+G = {
+    1:[2,3,4], 
+    2:[1,3,4], 
+    3:[1,2,4], 
+    4:[1,2,3]
 }
 
-def hamilton(graph, start_v):
-    size = len(graph)
+def hamilton(G, size, pt, path=[]):
+    print('hamilton called with pt={}, path={}'.format(pt, path))
+    if pt not in set(path):
+        path.append(pt)
+        if len(path)==size:
+            return path
+        for pt_next in G.get(pt, []):
+            res_path = [i for i in path]
+            candidate = hamilton(G, size, pt_next, res_path)
+            if candidate is not None:  # skip loop or dead end
+                return candidate
+        print('path {} is a dead end'.format(path))
+    else:
+        print('pt {} already in path {}'.format(pt, path))
+    # loop or dead end, None is implicitly returned
 
-    to_visit = [None, start_v]
-    path = []
-    while(to_visit):
-        v = to_visit.pop()
-        if v : 
-            path.append(v)
-            if len(path) == size:
-                break
-            for x in set(graph[v])-set(path):
-                to_visit.append(None) # out
-                to_visit.append(x) # in
-        else: # if None we are comming back and pop v
-            path.pop()
-    return path
+#hamilton(G, 4, 1)
 
-print(hamilton(G,6))
+#--------------------------------------------------------
+
+#эйлеров граф
+
+def find_eulerian_tour(graph):
+    stack = [];
+    tour = []
+ 
+    stack.append(graph[0][0])
+ 
+    while len(stack) > 0:
+        v = stack[len(stack) - 1]
+ 
+        degree = get_degree(v, graph)
+ 
+        if degree == 0:
+            stack.pop()
+            tour.append(v)
+        else:
+            index, edge = get_edge_and_index(v, graph)
+            graph.pop(index)
+            stack.append(edge[1] if v == edge[0] else edge[0])
+    return tour
+ 
+ 
+def get_degree(v, graph):
+    degree = 0
+    for (x, y) in graph:
+        if v == x or v == y:
+            degree += 1
+ 
+    return degree
+ 
+ 
+def get_edge_and_index(v, graph):
+    edge = ();
+    index = -1
+ 
+    for i in range(len(graph)):
+        if (v == graph[i][0] or v == graph[i][1]):
+            edge, index = graph[i], i
+            break
+ 
+    return index, edge
+ 
+ 
+graph = [(0, 1), (1, 5), (1, 7), (4, 5),
+(4, 8), (1, 6), (3, 7), (5, 9),
+(2, 4), (0, 4), (2, 5), (3, 6), (8, 9)]
+ 
+print((find_eulerian_tour(graph)))
