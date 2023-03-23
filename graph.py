@@ -75,7 +75,7 @@ G = {
 }
 
 def hamilton(G, size, pt, path=[]):
-    print('hamilton called with pt={}, path={}'.format(pt, path))
+    print(pt, path)
     if pt not in set(path):
         path.append(pt)
         if len(path)==size:
@@ -83,14 +83,14 @@ def hamilton(G, size, pt, path=[]):
         for pt_next in G.get(pt, []):
             res_path = [i for i in path]
             candidate = hamilton(G, size, pt_next, res_path)
-            if candidate is not None:  # skip loop or dead end
+            if candidate is not None:  
                 return candidate
-        print('path {} is a dead end'.format(path))
+        print(path)
     else:
         print('pt {} already in path {}'.format(pt, path))
-    # loop or dead end, None is implicitly returned
 
-#hamilton(G, 4, 1)
+
+hamilton(G, 4, 1)
 
 #--------------------------------------------------------
 
@@ -142,4 +142,4 @@ graph = [(0, 1), (1, 5), (1, 7), (4, 5),
 (4, 8), (1, 6), (3, 7), (5, 9),
 (2, 4), (0, 4), (2, 5), (3, 6), (8, 9)]
  
-print((find_eulerian_tour(graph)))
+#print((find_eulerian_tour(graph)))
