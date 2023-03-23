@@ -121,4 +121,23 @@ nx.draw(G, with_labels=True)
 
 tournament.hamiltonian_path(G)
 
+#--------------------------------------------------------
+#Алгоритм Дейкстры
+import networkx as nx
+from networkx.algorithms import tournament
+G = nx.DiGraph()
 
+distances = {
+    'A': {'B'},
+    'B': {'C','D'},
+    'C': {'A', 'A'},
+    'D': {'B', 'E'},
+    'E': {'A', 'D'}}
+
+for k,v in distances.items():
+    for k2 in v:
+        G.add_edge(k, k2)
+
+nx.draw(G, with_labels=True)
+
+nx.shortest_path(G, source='A', target="D", weight=None, method='dijkstra')
