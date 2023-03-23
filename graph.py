@@ -1,6 +1,3 @@
-'''поиск эйлерова цикла
-Эйлеров цикл существует тогда 
-и только тогда, когда граф связный и степени всех вершин чётны.'''
 
 #обход в глубину 
 
@@ -52,19 +49,7 @@ def obhod_v_shirinu(x,f):
 #obhod_v_shirinu(1, graph_1)
 
 #--------------------------------------------------------
-#алгоритм дейкстры
-'''
-class Graph:
-    def __init__(self, edges, n):
-        self.adjList = [None] * n
-        
-        for i in range(n):
-            self.adjList[i] = []
-        for (src, dest, weight) in edges:
-            self.adjList[src].append((dest, weight))
-'''
- 
-#--------------------------------------------------------
+
  #гамильтонов цикл
 
 G = {
@@ -93,53 +78,47 @@ def hamilton(G, size, pt, path=[]):
 hamilton(G, 4, 1)
 
 #--------------------------------------------------------
+#эйлеров цикл
 
-#эйлеров граф
+import networkx as nx 
+import matplotlib.pyplot as plt
 
-def find_eulerian_tour(graph):
-    stack = [];
-    tour = []
- 
-    stack.append(graph[0][0])
- 
-    while len(stack) > 0:
-        v = stack[len(stack) - 1]
- 
-        degree = get_degree(v, graph)
- 
-        if degree == 0:
-            stack.pop()
-            tour.append(v)
-        else:
-            index, edge = get_edge_and_index(v, graph)
-            graph.pop(index)
-            stack.append(edge[1] if v == edge[0] else edge[0])
-    return tour
- 
- 
-def get_degree(v, graph):
-    degree = 0
-    for (x, y) in graph:
-        if v == x or v == y:
-            degree += 1
- 
-    return degree
- 
- 
-def get_edge_and_index(v, graph):
-    edge = ();
-    index = -1
- 
-    for i in range(len(graph)):
-        if (v == graph[i][0] or v == graph[i][1]):
-            edge, index = graph[i], i
-            break
- 
-    return index, edge
- 
- 
-graph = [(0, 1), (1, 5), (1, 7), (4, 5),
-(4, 8), (1, 6), (3, 7), (5, 9),
-(2, 4), (0, 4), (2, 5), (3, 6), (8, 9)]
- 
-#print((find_eulerian_tour(graph)))
+distances = {
+    'A': {'B': 2},
+    'B': {'C': 4},
+    'C': {'D': 8},
+    'D': {'A': 7}
+}
+
+G = nx.DiGraph()
+for k,v in distances.items():
+    for k2,v2 in v.items():
+        G.add_edge(k, k2, dist=v2)
+
+nx.is_eulerian(G)
+#nx.draw(G, with_labels=True)
+
+#--------------------------------------------------------
+
+#гамильтонов цикл 2 вариант 
+
+import networkx as nx
+from networkx.algorithms import tournament
+G = nx.DiGraph()
+
+distances = {
+    'A': {'B'},
+    'B': {'C'},
+    'C': {'A', 'A'},
+    'D': {'B', 'E'},
+    'E': {'A', 'D'}}
+
+for k,v in distances.items():
+    for k2 in v:
+        G.add_edge(k, k2)
+
+nx.draw(G, with_labels=True)
+
+tournament.hamiltonian_path(G)
+
+
