@@ -1,18 +1,5 @@
 #связный список
 
-class full_grade:
-    def __init__(self, data):
-        full_grade.data = data
-        self.next = None
-
-    def append(self, val):
-        end = full_grade(val)
-        n = self
-        while (n.next):
-            n = n.next
-        n.next = end
-
-
 class school_class:
     def __init__(self, name, grade, mark):
         self.name = name
@@ -26,11 +13,26 @@ class school_class:
         while (n.next):
             n = n.next
         n.next = end
+    
+    def show_out(self):
+        node = self
+        print(node.name, node.grade, node.mark)
+        while node.next:
+            node = node.next
+        print(node.name, node.grade, node.mark)
 
-    def __del__(self):
-        print('Object destroyed')
 
+class full_grade(school_class):
+    def __init__(self, data):
+        full_grade.data = data
+        self.next = None
 
+    def append(self, val):
+        end = full_grade(val)
+        n = self
+        while (n.next):
+            n = n.next
+        n.next = end
 
         
     
@@ -53,10 +55,10 @@ full_11grade.append(class_11C)
 
 
 node = full_11grade
-print(node.data)
+print(node.show_out())
 while node.next:
     node = node.next
-    print(node.data)
+    node.show_out()
 
 print("\n")
 
