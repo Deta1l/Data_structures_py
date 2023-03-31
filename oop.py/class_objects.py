@@ -14,15 +14,9 @@ class school_class:
             n = n.next
         n.next = end
     
-    def show_out(self):
-        node = self
-        print(node.name, node.grade, node.mark)
-        while node.next:
-            node = node.next
-        print(node.name, node.grade, node.mark)
 
 
-class full_grade(school_class):
+class full_grade:
     def __init__(self, data):
         full_grade.data = data
         self.next = None
@@ -34,6 +28,13 @@ class full_grade(school_class):
             n = n.next
         n.next = end
 
+    def show_off(self):
+        n = self
+        print(n.data.name)
+        while (n.next):
+            print(n.data.name)
+            n = n.next
+
         
     
 
@@ -42,25 +43,16 @@ class_11A = school_class("Maxim Pyankov", "11A", 5)
 class_11A.append("Popov", "11A", 3)
 class_11A.append("Krasnov", "11A", 4)
 class_11A.append("Lapin", "11A", 5)
-class_11B = school_class("Maxim Pyankov", "11A", 5)
-class_11B.append("Popov", "11A", 3)
-class_11B.append("Lapin", "11A", 5)
-class_11C = school_class("Maxim Pyankov", "11A", 5)
-class_11C.append("Popov", "11A", 3)
-class_11C.append("Lapin", "11A", 5)
+class_11B = school_class("DIMA Pyankov", "11A", 5)
+class_11B.append("Popov", "11B", 3)
+class_11B.append("Lapin", "11B", 5)
+class_11C = school_class("Kodtya Pyankov", "11A", 5)
+class_11C.append("Popov", "11C", 3)
+class_11C.append("Lapin", "11c", 5)
 
 full_11grade = full_grade(class_11A)
-full_11grade.append(class_11B)
 full_11grade.append(class_11C)
-
-
-node = full_11grade
-print(node.show_out())
-while node.next:
-    node = node.next
-    node.show_out()
-
-print("\n")
+full_11grade.append(class_11B)
 
 node = class_11A
 print(node.name, node.grade, node.mark)
@@ -70,3 +62,5 @@ while node.next:
 
 
 print("\n")
+
+full_11grade.show_off()
