@@ -59,9 +59,29 @@ def get_prime_factors(a):
     return factors
 
 
-a = int(input())
+#a = int(input())
 
-print(get_prime_factors(a))
-deliteli(a)
+#print(get_prime_factors(a))
+#deliteli(a)
 
 #-----------------------------------------
+max_kol_del = 0
+tekysh_kol_del = 0
+
+for i in range(30000,35000+1):
+    for n in range(2, i):
+        if (i % n == 0):
+            tekysh_kol_del += 1
+    if tekysh_kol_del > max_kol_del:
+        max_kol_del = tekysh_kol_del
+    tekysh_kol_del = 0 
+
+#-----------------------------------------
+
+for i in range(25, 275+1):
+    if i % 10 == 0 and i % 5 == 0 and i % 15 == 0:
+        print(i)
+        
+        
+            
+
